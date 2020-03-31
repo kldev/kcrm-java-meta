@@ -1,6 +1,7 @@
 package dev.kcrm.web.service;
 
 
+import dev.kcrm.web.constant.UserRoles;
 import dev.kcrm.web.data.documents.LeadStatus;
 import dev.kcrm.web.data.documents.User;
 import dev.kcrm.web.data.repositories.ClientCrudRepository;
@@ -65,27 +66,33 @@ public class SeedService {
                     .withUsername("root")
                     .withPassword("toor")
                     .withEmail("root@localhost.com")
-                    .withFullName("The root user").withRole("root").build();
+                    .withFullName("The root user").withRole(UserRoles.Root).build();
 
             User admin = User.UserBuilder.anUser()
                     .withUsername("admin")
                     .withPassword("admin")
                     .withEmail("admin@localhost.com")
-                    .withFullName("The admin user").withRole("admin").build();
+                    .withFullName("The admin user").withRole(UserRoles.Admin).build();
+
+            User adminAndRoot = User.UserBuilder.anUser()
+                    .withUsername("superadmin")
+                    .withPassword("superadmin")
+                    .withEmail("superadmin@localhost.com")
+                    .withFullName("The super admin user").withRole(UserRoles.Admin).withRole(UserRoles.Admin).build();
 
             User john = User.UserBuilder.anUser()
                     .withUsername("john")
                     .withPassword("secret")
                     .withEmail("john.smith@localhost.com")
-                    .withFullName("John Smith").withRole("user").build();
+                    .withFullName("John Smith").withRole(UserRoles.User).build();
 
             User eve =  User.UserBuilder.anUser()
                     .withUsername("Eve")
                     .withPassword( "secret")
                     .withEmail("eve.link@localhost.com")
-                    .withFullName("Eve Link").withRole("user").build();
+                    .withFullName("Eve Link").withRole(UserRoles.User).build();
 
-            this.userCrudRepository.saveAll(Flux.just(root, admin, john, eve)).then().block();
+            this.userCrudRepository.saveAll(Flux.just(root, admin, adminAndRoot, john, eve)).then().block();
 
             int i = 0;
             List<User> randomUsers = new ArrayList();
@@ -99,7 +106,7 @@ public class SeedService {
                         .withUsername(firstName.toLowerCase())
                         .withPassword(password)
                         .withEmail(String.format("%s.%s@localhost.com", firstName.toLowerCase(), lastName.toLowerCase()))
-                        .withFullName(String.format("%s %s", firstName, lastName)).withRole("user").build();
+                        .withFullName(String.format("%s %s", firstName, lastName)).withRole(UserRoles.User).build();
 
                 randomUsers.add(random);
 

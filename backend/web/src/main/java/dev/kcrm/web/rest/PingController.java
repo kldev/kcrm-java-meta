@@ -6,10 +6,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
+
 @RestController
-@RequestMapping("api/contact")
-public class ContactServiceController {
+@RequestMapping("api/ping")
+public class PingController {
 
-
-
+    @GetMapping("")
+    private Mono<PongResponse> getPing() {
+        return Mono.just(new PongResponse("Pong"));
+    }
 }
