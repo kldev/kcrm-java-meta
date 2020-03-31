@@ -1,5 +1,6 @@
 package dev.kcrm.web.data.documents;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.kcrm.web.security.PasswordHashUtil;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -19,6 +20,7 @@ public class User {
     @Max(100)
     private String username;
 
+    @JsonIgnore
     @NotNull
     @Max(100)
     private String password;
