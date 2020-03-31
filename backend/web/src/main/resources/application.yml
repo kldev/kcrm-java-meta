@@ -1,0 +1,12 @@
+spring:
+  data:
+    mongodb:
+      authentication-database: admin
+      port: ${MONGO_PORT:28017}
+      username: ${MONGO_USERNAME:root}
+      password: ${MONGO_PASSWORD:VeryStrongPass@}
+      host: ${MONGO_IP:127.0.0.1}
+      database: crm
+
+server:
+  port: ${WEB_PORT:32000}
