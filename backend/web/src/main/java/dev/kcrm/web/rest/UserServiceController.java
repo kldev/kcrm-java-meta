@@ -26,5 +26,4 @@ public class UserServiceController {
         return service.getUserByRole(role);
     }
 
-
 }

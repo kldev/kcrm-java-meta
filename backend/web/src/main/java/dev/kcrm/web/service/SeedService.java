@@ -25,11 +25,11 @@ public class SeedService {
 
     private static Log logger = LogFactory.getLog(SeedService.class);
 
-    private UserCrudRepository userCrudRepository;
-    private LeadStatusCrudRepository leadStatusCrudRepository;
-    private ContactCrudRepository contactCrudRepository;
-    private ClientCrudRepository clientCrudRepository;
-    private Generator generator;
+    private final UserCrudRepository userCrudRepository;
+    private final LeadStatusCrudRepository leadStatusCrudRepository;
+    private final ContactCrudRepository contactCrudRepository;
+    private final ClientCrudRepository clientCrudRepository;
+    private final Generator generator;
 
 
     @Autowired
@@ -78,7 +78,7 @@ public class SeedService {
                     .withUsername("superadmin")
                     .withPassword("superadmin")
                     .withEmail("superadmin@localhost.com")
-                    .withFullName("The super admin user").withRole(UserRoles.Admin).withRole(UserRoles.Admin).build();
+                    .withFullName("The super admin user").withRole(UserRoles.Admin).withRole(UserRoles.Root).build();
 
             User john = User.UserBuilder.anUser()
                     .withUsername("john")

@@ -13,7 +13,7 @@ public class LeadService {
 
     private static Log logger = LogFactory.getLog(LeadService.class);
 
-    private LeadStatusCrudRepository leadStatusCrudRepository;
+    private final LeadStatusCrudRepository leadStatusCrudRepository;
 
     @Autowired
     public LeadService(LeadStatusCrudRepository leadStatusCrudRepository) {

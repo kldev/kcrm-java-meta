@@ -17,3 +17,7 @@ springdoc:
     groups:
       enabled: true
     path: /swagger-ui.html
+
+application:
+  securitySecret: kTWNPPyX*GQ0#5kG%yAuurVvC@XRq#mB
+

@@ -1,0 +1,44 @@
+@baseUrl=http://localhost:32000
+
+
+### login root test
+# @name loginRoot
+POST {{baseUrl}}/api/login
+Content-Type: application/json
+
+{
+    "username": "root",
+    "password": "toor"
+}
+
+
+@authToken = {{loginRoot.response.body.$.token}}
+# changed signature
+#@authToken = eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6InJvb3QiLCJpZCI6IjVlODM2ZjU2ZTY4ZWEwMWE1YzczYTQxMyIsInVzZXJuYW1lIjoicm9vdCIsImV4cCI6MTU4NTg3NTMzN30.GJdyPg7rZnoLIxkHsKE2np5oK0ehmlnccgp8qw-3gRE
+
+###
+
+###
+GET {{baseUrl}}/api/user/root
+Authorization: Bearer {{authToken}}
+
+### Login Admin
+
+POST {{baseUrl}}/api/login
+Content-Type: application/json
+
+{
+    "username": "superadmin",
+    "password": "superadmin"
+}
+
+
+### Wrong Password Root
+
+POST {{baseUrl}}/api/login
+Content-Type: application/json
+
+{
+    "username": "root",
+    "password": "wrong-password"
+}
