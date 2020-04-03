@@ -47,7 +47,7 @@ public class JwtReactiveAuthenticationManager implements ReactiveAuthenticationM
     }
 
     private <T> Mono<T> raiseBadCredentials() {
-        return Mono.error(new BadCredentialsException("Invalid Credentials"));
+       return Mono.error(new BadCredentialsException("Invalid Credentials"));
     }
 
     private Mono<UserDetails> authenticateToken(final UsernamePasswordAuthenticationToken authenticationToken) {

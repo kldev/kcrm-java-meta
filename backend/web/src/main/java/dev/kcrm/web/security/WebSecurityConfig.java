@@ -75,6 +75,7 @@ public class WebSecurityConfig {
         authenticationWebFilter.setServerAuthenticationConverter(new TokenAuthenticationConverter(tokenProvider));
         authenticationWebFilter.setRequiresAuthenticationMatcher(new AuthorizationHeadersExchangeMatcher());
         authenticationWebFilter.setSecurityContextRepository(new WebSessionServerSecurityContextRepository());
+        
         return authenticationWebFilter;
     }
 
