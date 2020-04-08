@@ -1,5 +1,6 @@
 package dev.kcrm.web.security.jwt;
 
+import dev.kcrm.web.dto.UserDto;
 import dev.kcrm.web.security.WebApiUserDetails;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
@@ -62,6 +63,7 @@ public class JwtProvider {
        // SecretKey signingKey = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
 
         return Jwts.builder()
+                .setId(details.getId())
                 .setSubject(authentication.getName())
                 .setClaims(claims)
                 .setExpiration(Date.from(Instant.now().plus(12, ChronoUnit.HOURS)))
@@ -88,7 +90,16 @@ public class JwtProvider {
 
         User principal = new User(claims.get("username", String.class), "", authorities);
 
-        return new UsernamePasswordAuthenticationToken(principal, token, authorities);
+
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(principal, token, authorities);
+        UserDto details = new UserDto();
+        details.setUsername(principal.getUsername());
+        details.setRoles(authorities.stream().map(x->x.getAuthority()).collect(Collectors.joining(",")));
+        details.setId(claims.get("id", String.class));
+
+        authenticationToken.setDetails(details);
+
+        return authenticationToken;
     }
 
     public boolean validateToken(String authToken) {

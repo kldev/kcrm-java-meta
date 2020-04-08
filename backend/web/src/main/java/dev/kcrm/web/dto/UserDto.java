@@ -1,5 +1,7 @@
 package dev.kcrm.web.dto;
 
+import dev.kcrm.web.security.WebApiUserDetails;
+
 public class UserDto {
 
     private String id;
@@ -31,5 +33,17 @@ public class UserDto {
 
     public void setRoles(String roles) {
         this.roles = roles;
+    }
+
+
+
+
+    public static UserDto fromDetails(WebApiUserDetails details) {
+        UserDto user = new UserDto();
+        user.setId(details.getId());
+        user.setRoles(String.join(",", details.getRoles()));
+        user.setUsername(details.getUsername());
+
+        return user;
     }
 }

@@ -14,8 +14,6 @@ Content-Type: application/json
 
 @authToken = {{loginRoot.response.body.$.token}}
 # changed signature
-#@authToken = eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6InJvb3QiLCJpZCI6IjVlODM2ZjU2ZTY4ZWEwMWE1YzczYTQxMyIsInVzZXJuYW1lIjoicm9vdCIsImV4cCI6MTU4NTg3NTMzN30.GJdyPg7rZnoLIxkHsKE2np5oK0ehmlnccgp8qw-3gRE
-
 ###
 
 ###
@@ -42,3 +40,7 @@ Content-Type: application/json
     "username": "root",
     "password": "wrong-password"
 }
+
+### Get user from context
+GET {{baseUrl}}/api/current
+Authorization: Bearer {{authToken}}
