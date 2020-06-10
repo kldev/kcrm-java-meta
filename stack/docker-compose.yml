@@ -1,20 +1,13 @@
 version: "3.7"
 services:
    mongo:    
-    image: mongo-kcrm
-    build: 
-        context: ./mongo
+    image: mongo:4.2-bionic
     ports:
         - "28017:27017"
     volumes: 
         - mongo.data:/data/db
     environment: 
         MONGO_INITDB_ROOT_USERNAME: root
-        MONGO_INITDB_ROOT_PASSWORD: VeryStrongPass@         
-    healthcheck:
-        test: ["CMD","bash", "/usr/local/bin/healthcheck.sh"]
-        interval: 10s
-        timeout: 2s
-        retries: 10
+        MONGO_INITDB_ROOT_PASSWORD: VeryStrongPass@             
 volumes: 
     mongo.data:
